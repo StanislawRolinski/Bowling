@@ -7,6 +7,8 @@ public class PinSetter : MonoBehaviour
 {
     public int lastStandingCount = -1;
     public Text text;
+    public float distanceToRise = 40f;
+    public GameObject pinSet;
 
     private Ball ball;
     private float lastChangeTime;
@@ -86,5 +88,26 @@ public class PinSetter : MonoBehaviour
             }
         }
         return pinsStanding;
+    }
+
+    void RisePins()
+    {
+        foreach (Pin pin in GameObject.FindObjectsOfType<Pin>())
+        {
+            pin.RaiseIfStanding();
+        }
+    }
+
+    void LowerPins()
+    {
+        foreach (Pin pin in GameObject.FindObjectsOfType<Pin>())
+        {
+            pin.Lower();
+        }
+    }
+
+    public void RenewPins()
+    {
+        Instantiate(pinSet, new Vector3(0, 0.5f, 1829), Quaternion.identity);
     }
 }
